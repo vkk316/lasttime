@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lasttime/model/task.dart';
+import 'package:lasttime/screen/task_datetime_log_screen.dart';
+import 'package:lasttime/service/date_format.dart';
 import 'package:lasttime/service/task_services.dart';
 
 class TaskCard extends StatelessWidget {
-  TaskCard({required this.task, required this.callback}) : _service = TaskService();
+  TaskCard({required this.task, required this.callback})
+      : _service = TaskService();
   final Task task;
   final TaskService _service;
   final Function callback;
-
-  DateFormat dateFormat = DateFormat.MMMd();
-  DateFormat timeFormat = DateFormat(DateFormat.HOUR24_MINUTE);
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +50,10 @@ class TaskCard extends StatelessWidget {
                   children: [
                     task.timeStamps.isEmpty
                         ? Text('No date')
-                        : Text(dateFormat.format(task.timeStamps.last)),
+                        : Text(MyDateFormat.dateFormat.format(task.timeStamps.last)),
                     task.timeStamps.isEmpty
                         ? Text('No time')
-                        : Text(timeFormat.format(task.timeStamps.last))
+                        : Text(MyDateFormat.timeFormat.format(task.timeStamps.last))
                   ],
                 )
               ],
@@ -102,7 +102,14 @@ class TaskCard extends StatelessWidget {
                       ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               primary: Theme.of(context).canvasColor),
-                          onPressed: () => print('history'),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TaskDateTimeLogScreen(task: task,)),
+                            );
+
+                          },
                           icon: Icon(Icons.history),
                           label: Text('History'))
                     ],
