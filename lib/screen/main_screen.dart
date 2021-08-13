@@ -40,7 +40,10 @@ class _MainScreenState extends State<MainScreen> {
       body: ListView.builder(
         itemCount: tasks.length,
         itemBuilder: (BuildContext context, int index) {
-          return TaskCard(task: tasks[index], callback: () => refreshTasks(),);
+          return TaskCard(
+            task: tasks[index],
+            callback: () => refreshTasks(),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -59,6 +62,13 @@ class _MainScreenState extends State<MainScreen> {
             itemCount: cat.length,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
+                onTap: () {
+                  setState(() {
+                    _service.filterTasks(index);
+                    refreshTasks();
+                  });
+                  Navigator.pop(context);
+                },
                 title: Text(cat[index]),
               );
             },
@@ -96,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
         });
   }
 
-  void refreshTasks(){
+  void refreshTasks() {
     setState(() {
       tasks = _service.getTask;
     });
