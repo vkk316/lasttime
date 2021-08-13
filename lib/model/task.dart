@@ -8,13 +8,13 @@ class Task extends HiveObject{
   Task({required this.title, required this.timeStamps, required this.categoryID});
   
   @HiveField(0)
-  final String title;
+  late String title;
   
   @HiveField(1)
-  final List<DateTime> timeStamps;
+  late List<DateTime> timeStamps;
 
   @HiveField(2)
-  final int categoryID;
+  late int categoryID;
 
   static const List<String> categories = ['Garden', 'Food', 'Vehicle', 'Entertainment', 'Learning'];
 }
