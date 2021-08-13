@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lasttime/model/task.dart';
 import 'package:lasttime/service/task_services.dart';
 import 'package:lasttime/widget/category_tiles.dart';
+import 'package:lasttime/widget/task_card.dart';
 import 'package:lasttime/widget/task_form.dart';
 
 class MainScreen extends StatefulWidget {
@@ -38,10 +40,7 @@ class _MainScreenState extends State<MainScreen> {
       body: ListView.builder(
         itemCount: tasks.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(tasks[index].title),
-            subtitle: Text(Task.categories[tasks[index].categoryID]),
-          );
+          return TaskCard(task: tasks[index], callback: () => refreshTasks(),);
         },
       ),
       floatingActionButton: FloatingActionButton(
