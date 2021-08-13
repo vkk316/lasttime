@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
           title: Text('LASTTIME'),
           actions: [
             IconButton(
-                onPressed: () => print("HI"), icon: Icon(Icons.filter_alt)),
+                onPressed: _onPressFilterButton, icon: Icon(Icons.filter_alt)),
             IconButton(
                 onPressed: () => print("HI"), icon: Icon(Icons.more_vert))
           ],
@@ -52,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
   void _onPressFilterButton(){
     showModalBottomSheet(context: context, builder: (context){
       var cat = Task.categories;
-      return ListView.builder(itemBuilder: (BuildContext context, int index) { return ListTile(); },);
+      return ListView.builder(itemCount: cat.length,itemBuilder: (BuildContext context, int index) { return ListTile(title: Text(cat[index]),); },);
     });
   }
 }
