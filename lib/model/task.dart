@@ -1,9 +1,20 @@
-class Task {
+import 'package:hive/hive.dart';
 
-  Task({required this.title, required this.timeStamp, required this.categoryID});
+part 'task.g.dart';
+
+@HiveType(typeId: 0)
+class Task extends HiveObject{
+
+  Task({required this.title, required this.timeStamps, required this.categoryID});
+  
+  @HiveField(0)
   final String title;
-  final DateTime timeStamp;
+  
+  @HiveField(1)
+  final List<DateTime> timeStamps;
+
+  @HiveField(2)
   final int categoryID;
 
-  static const List<String> categories = ['Garden', 'Cooking', 'Vehicle', 'Entertainment', 'Learning'];
+  static const List<String> categories = ['Garden', 'Food', 'Vehicle', 'Entertainment', 'Learning'];
 }
